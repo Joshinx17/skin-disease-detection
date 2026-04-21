@@ -1140,6 +1140,7 @@ footer {
   transition: transform 0.2s var(--ease-spring), box-shadow 0.3s;
   cursor: none; overflow: hidden;
   animation: hero-btn-glow 3s ease-in-out infinite;
+  border: none;
 }
 @keyframes hero-btn-glow {
   0%,100% { box-shadow: 0 0 0 0 rgba(0,212,255,0.6), 0 8px 32px rgba(0,212,255,0.4); }
@@ -1242,31 +1243,7 @@ footer {
 }
 .demo-launch-sub span { color: var(--ghost); }
 
-/* port input */
-.port-row {
-  display: inline-flex; align-items: center; gap: 10px;
-  margin-top: 14px;
-  background: var(--ink-3); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px; padding: 8px 12px 8px 16px;
-}
-.port-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
-.port-input {
-  background: var(--ink); border: 1px solid rgba(0,212,255,0.2);
-  border-radius: 8px; padding: 6px 10px;
-  font-family: var(--font-mono); font-size: 0.78rem; color: var(--cyan);
-  width: 80px; text-align: center; outline: none;
-  transition: border-color 0.2s;
-}
-.port-input:focus { border-color: rgba(0,212,255,0.5); }
-.port-apply {
-  background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.25);
-  border-radius: 8px; padding: 6px 14px;
-  font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan);
-  cursor: none; transition: background 0.2s;
-}
-.port-apply:hover { background: rgba(0,212,255,0.2); }
-
-/* feature pills row */
+/* feature pills */
 .demo-features {
   display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
   margin-top: 36px;
@@ -1361,6 +1338,18 @@ footer {
 .status-dot-green { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: blink 1.5s infinite; }
 .status-dot-amber { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
 
+/* ═══════════════════════════════════════════════
+   SCROLL-TO-DEMO HIGHLIGHT PULSE
+═══════════════════════════════════════════════ */
+@keyframes highlight-pulse {
+  0%   { box-shadow: 0 6px 40px rgba(0,212,255,0.45), 0 0 0 0 rgba(0,212,255,0.6); }
+  40%  { box-shadow: 0 8px 60px rgba(0,212,255,0.7), 0 0 0 18px rgba(0,212,255,0); }
+  100% { box-shadow: 0 6px 40px rgba(0,212,255,0.45), 0 0 0 0 rgba(0,212,255,0); }
+}
+.demo-launch-btn.highlight-anim {
+  animation: highlight-pulse 0.8s ease-out forwards !important;
+}
+
 </style>
 </head>
 <body>
@@ -1420,15 +1409,15 @@ footer {
 
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="stat-num"><span class="count-up" data-target="89">0</span>%</span>
+        <span class="stat-num"><span class="count-up" data-target="89">89</span>%</span>
         <span class="stat-label">Overall Accuracy</span>
       </div>
       <div class="hero-stat">
-        <span class="stat-num"><span class="count-up" data-target="99">0</span>%</span>
+        <span class="stat-num"><span class="count-up" data-target="99">99</span>%</span>
         <span class="stat-label">Melanoma Recall</span>
       </div>
       <div class="hero-stat">
-        <span class="stat-num"><span class="count-up" data-target="7">0</span></span>
+        <span class="stat-num"><span class="count-up" data-target="7">7</span></span>
         <span class="stat-label">Disease Classes</span>
       </div>
       <div class="hero-stat">
@@ -1438,10 +1427,11 @@ footer {
     </div>
 
     <div class="hero-ctas">
-      <a href="#live-demo" class="btn-launch" id="hero-launch-btn">
+      <!-- CHANGED: now scrolls to #live-demo and pulses the Open DermAI App button -->
+      <button class="btn-launch" id="hero-launch-btn" onclick="scrollToDemo()">
         <span class="btn-launch-pulse"></span>
         🚀 Launch Live Demo
-      </a>
+      </button>
       <a href="#pipeline" class="btn-primary">Explore the Pipeline →</a>
       <a href="#results"  class="btn-ghost">View Results</a>
     </div>
@@ -1496,23 +1486,16 @@ footer {
 
       <div class="skin-viz reveal reveal-delay-1">
         <div class="skin-viz-inner">
-          <!-- orbit rings -->
           <div class="orbit-ring" style="width:200px;height:200px;border-color:rgba(0,212,255,0.12);"></div>
           <div class="orbit-ring" style="width:280px;height:280px;border-color:rgba(0,212,255,0.07);"></div>
           <div class="orbit-ring" style="width:330px;height:330px;border-color:rgba(0,212,255,0.04);"></div>
-
-          <!-- orbiting dots -->
           <div class="data-dot" style="--r:100px;background:var(--rose);width:12px;height:12px;animation-duration:6s;"></div>
           <div class="data-dot" style="--r:100px;background:var(--emerald);width:10px;height:10px;animation-duration:6s;animation-delay:-3s;"></div>
           <div class="data-dot" style="--r:140px;background:var(--amber);width:8px;height:8px;animation-duration:9s;"></div>
           <div class="data-dot" style="--r:140px;background:var(--violet);width:10px;height:10px;animation-duration:9s;animation-delay:-4.5s;"></div>
           <div class="data-dot" style="--r:165px;background:var(--cyan);width:7px;height:7px;animation-duration:12s;"></div>
           <div class="data-dot" style="--r:165px;background:var(--teal);width:9px;height:9px;animation-duration:12s;animation-delay:-6s;"></div>
-
-          <!-- center -->
           <div class="skin-center">🔬</div>
-
-          <!-- stat badges -->
           <div class="stat-badge" style="top:10px;right:10px;">
             <div class="stat-badge-num">10K+</div>
             <div class="stat-badge-label">Images</div>
@@ -1550,7 +1533,6 @@ footer {
     <div class="pipeline-flow reveal">
       <div class="pipeline-line"></div>
       <div class="pipeline-steps">
-
         <div class="pipeline-step step-s1 reveal reveal-delay-1">
           <div class="pipeline-step-icon">📷</div>
           <div class="pipeline-step-num">Step 01</div>
@@ -1559,7 +1541,6 @@ footer {
             <div class="pipeline-step-desc">HAM10000 dermoscopic images, 7 classes, real clinical data</div>
           </div>
         </div>
-
         <div class="pipeline-step step-s2 reveal reveal-delay-2">
           <div class="pipeline-step-icon">⚙️</div>
           <div class="pipeline-step-num">Step 02</div>
@@ -1568,7 +1549,6 @@ footer {
             <div class="pipeline-step-desc">Resize 224×224, normalize pixels, one-hot encode labels</div>
           </div>
         </div>
-
         <div class="pipeline-step step-s3 reveal reveal-delay-3">
           <div class="pipeline-step-icon">🧠</div>
           <div class="pipeline-step-num">Step 03</div>
@@ -1577,7 +1557,6 @@ footer {
             <div class="pipeline-step-desc">Transfer learning extracts 2048-dim visual feature vector</div>
           </div>
         </div>
-
         <div class="pipeline-step step-s4 reveal reveal-delay-4">
           <div class="pipeline-step-icon">📊</div>
           <div class="pipeline-step-num">Step 04</div>
@@ -1586,7 +1565,6 @@ footer {
             <div class="pipeline-step-desc">Age, sex, localization encoded → 8-dim MLP vector fused</div>
           </div>
         </div>
-
         <div class="pipeline-step step-s5 reveal">
           <div class="pipeline-step-icon">🏷️</div>
           <div class="pipeline-step-num">Step 05</div>
@@ -1595,7 +1573,6 @@ footer {
             <div class="pipeline-step-desc">FC layers + Softmax produce 7-class probability vector</div>
           </div>
         </div>
-
         <div class="pipeline-step step-s6 reveal reveal-delay-1">
           <div class="pipeline-step-icon">🔥</div>
           <div class="pipeline-step-num">Step 06</div>
@@ -1604,7 +1581,6 @@ footer {
             <div class="pipeline-step-desc">Gradient-weighted heatmap explains AI's focus region</div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -1631,7 +1607,6 @@ transform = <span class="code-func">Compose</span>([
   <span class="code-func">Normalize</span>(mean, std)
 ])</div>
       </div>
-
       <div class="pipe-detail-card reveal reveal-delay-2">
         <div class="pipe-detail-tag">Training · Optimization</div>
         <div class="pipe-detail-title">Loss Function & Optimizer</div>
@@ -1653,7 +1628,6 @@ optimizer = <span class="code-func">Adam</span>(
 )
 criterion = <span class="code-func">CrossEntropyLoss</span>()</div>
       </div>
-
       <div class="pipe-detail-card reveal reveal-delay-1">
         <div class="pipe-detail-tag">Feature Extraction · Step 03</div>
         <div class="pipe-detail-title">Transfer Learning Strategy</div>
@@ -1674,7 +1648,6 @@ fᵢ = Φ(xᵢ; θ)
     self.meta_net = nn.<span class="code-func">Sequential</span>(...)
     self.classifier = nn.<span class="code-func">Sequential</span>(...)</div>
       </div>
-
       <div class="pipe-detail-card reveal reveal-delay-2">
         <div class="pipe-detail-tag">Fusion · Step 04</div>
         <div class="pipe-detail-title">Metadata Encoding & Fusion</div>
@@ -1712,14 +1685,11 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
     </p>
 
     <div class="model-grid">
-      <!-- Architecture diagram -->
       <div class="arch-visual reveal reveal-delay-2">
         <div class="arch-diagram">
           <div style="text-align:center;margin-bottom:24px;">
             <span style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">FusionModel · PyTorch Architecture</span>
           </div>
-
-          <!-- Image Branch -->
           <div style="margin-bottom:4px;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);text-align:center;">── Image Branch ──</div>
           <div class="arch-layer" style="margin-bottom:6px;">
             <div class="arch-label">Input</div>
@@ -1738,8 +1708,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
             <div class="arch-layer-bar" style="height:32px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.2);color:var(--violet);">nn.Identity() — Feature Vector</div>
             <div class="arch-size">2048-d</div>
           </div>
-
-          <!-- Metadata Branch -->
           <div style="margin:16px 0 4px;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--emerald);text-align:center;">── Metadata Branch ──</div>
           <div class="arch-layer" style="margin-bottom:6px;">
             <div class="arch-label">Input</div>
@@ -1758,8 +1726,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
             <div class="arch-layer-bar" style="height:32px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);color:#6ee7b7;">Linear → ReLU</div>
             <div class="arch-size">8-d</div>
           </div>
-
-          <!-- Fusion -->
           <div style="margin:16px 0 4px;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);text-align:center;">── Fusion & Classifier ──</div>
           <div class="arch-layer" style="margin-bottom:6px;">
             <div class="arch-label">Concat</div>
@@ -1779,7 +1745,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
             <div class="arch-size">7-d</div>
           </div>
         </div>
-
         <div class="formula-card" style="margin-top:16px;">
           <div class="formula-label">Softmax Output</div>
           <div class="formula">
@@ -1791,98 +1756,37 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
         </div>
       </div>
 
-      <!-- Specs -->
       <div class="model-specs reveal reveal-delay-1">
         <div class="spec-group">
           <div class="spec-group-title">Architecture</div>
-          <div class="spec-item">
-            <span class="spec-key">Backbone</span>
-            <span class="spec-val">ResNet50 (pretrained)</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Image feature dim</span>
-            <span class="spec-val">2,048</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Metadata input dim</span>
-            <span class="spec-val">19</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Metadata hidden</span>
-            <span class="spec-val">16 → 8</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Fused feature dim</span>
-            <span class="spec-val">2,056</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Classifier hidden</span>
-            <span class="spec-val">512</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Output classes</span>
-            <span class="spec-val">7</span>
-          </div>
+          <div class="spec-item"><span class="spec-key">Backbone</span><span class="spec-val">ResNet50 (pretrained)</span></div>
+          <div class="spec-item"><span class="spec-key">Image feature dim</span><span class="spec-val">2,048</span></div>
+          <div class="spec-item"><span class="spec-key">Metadata input dim</span><span class="spec-val">19</span></div>
+          <div class="spec-item"><span class="spec-key">Metadata hidden</span><span class="spec-val">16 → 8</span></div>
+          <div class="spec-item"><span class="spec-key">Fused feature dim</span><span class="spec-val">2,056</span></div>
+          <div class="spec-item"><span class="spec-key">Classifier hidden</span><span class="spec-val">512</span></div>
+          <div class="spec-item"><span class="spec-key">Output classes</span><span class="spec-val">7</span></div>
         </div>
-
         <div class="spec-group">
           <div class="spec-group-title">Training Setup</div>
-          <div class="spec-item">
-            <span class="spec-key">Optimizer</span>
-            <span class="spec-val">Adam (β₁=0.9, β₂=0.999)</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Loss function</span>
-            <span class="spec-val">Categorical Cross-Entropy</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Regularization</span>
-            <span class="spec-val">Dropout (0.3, 0.4)</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Batch normalization</span>
-            <span class="spec-val">Yes (meta + classifier)</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Input resolution</span>
-            <span class="spec-val">224 × 224 pixels</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Dataset</span>
-            <span class="spec-val">HAM10000</span>
-          </div>
+          <div class="spec-item"><span class="spec-key">Optimizer</span><span class="spec-val">Adam (β₁=0.9, β₂=0.999)</span></div>
+          <div class="spec-item"><span class="spec-key">Loss function</span><span class="spec-val">Categorical Cross-Entropy</span></div>
+          <div class="spec-item"><span class="spec-key">Regularization</span><span class="spec-val">Dropout (0.3, 0.4)</span></div>
+          <div class="spec-item"><span class="spec-key">Batch normalization</span><span class="spec-val">Yes (meta + classifier)</span></div>
+          <div class="spec-item"><span class="spec-key">Input resolution</span><span class="spec-val">224 × 224 pixels</span></div>
+          <div class="spec-item"><span class="spec-key">Dataset</span><span class="spec-val">HAM10000</span></div>
         </div>
-
         <div class="spec-group">
           <div class="spec-group-title">Metadata Features (19 total)</div>
-          <div class="spec-item">
-            <span class="spec-key">Age</span>
-            <span class="spec-val">Normalized (μ=51.86, σ=16.96)</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Sex</span>
-            <span class="spec-val">One-hot: male / female / unknown</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Localization</span>
-            <span class="spec-val">One-hot: 15 body regions</span>
-          </div>
+          <div class="spec-item"><span class="spec-key">Age</span><span class="spec-val">Normalized (μ=51.86, σ=16.96)</span></div>
+          <div class="spec-item"><span class="spec-key">Sex</span><span class="spec-val">One-hot: male / female / unknown</span></div>
+          <div class="spec-item"><span class="spec-key">Localization</span><span class="spec-val">One-hot: 15 body regions</span></div>
         </div>
-
         <div class="spec-group">
           <div class="spec-group-title">Clinical Design Goals</div>
-          <div class="spec-item">
-            <span class="spec-key">Priority</span>
-            <span class="spec-val" style="color:var(--rose);">Minimize false negatives</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Sensitivity target</span>
-            <span class="spec-val">Malignant classes first</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-key">Explainability</span>
-            <span class="spec-val">Grad-CAM visualization</span>
-          </div>
+          <div class="spec-item"><span class="spec-key">Priority</span><span class="spec-val" style="color:var(--rose);">Minimize false negatives</span></div>
+          <div class="spec-item"><span class="spec-key">Sensitivity target</span><span class="spec-val">Malignant classes first</span></div>
+          <div class="spec-item"><span class="spec-key">Explainability</span><span class="spec-val">Grad-CAM visualization</span></div>
         </div>
       </div>
     </div>
@@ -1902,7 +1806,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       The model classifies across three high-risk malignant and four benign conditions,
       reflecting the true clinical distribution of the HAM10000 dataset.
     </p>
-
     <div class="classes-grid">
       <div class="class-card risk reveal reveal-delay-1 tooltip" data-tip="Malignant — High Risk">
         <span class="class-emoji">☀️</span>
@@ -1971,8 +1874,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       The model demonstrates strong generalization, clinically-safe error patterns,
       and exceptional recall for malignant conditions.
     </p>
-
-    <!-- KPIs -->
     <div class="results-top">
       <div class="result-kpi reveal reveal-delay-1">
         <span class="kpi-icon">🎯</span>
@@ -2000,7 +1901,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       </div>
     </div>
 
-    <!-- Classification report table -->
     <div class="report-table-wrap reveal">
       <table class="report-table">
         <thead>
@@ -2091,98 +1991,37 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       </table>
     </div>
 
-    <!-- Bar chart + ROC -->
     <div class="bar-chart-section reveal">
       <div class="bar-chart-title">Recall by Disease Class</div>
       <div class="bar-chart" id="bar-chart">
-        <div class="bar-chart-col">
-          <div class="bar-val">91%</div>
-          <div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--emerald),#059669);" data-h="91"></div></div>
-          <div class="bar-lbl">bkl</div>
-        </div>
-        <div class="bar-chart-col">
-          <div class="bar-val">85%</div>
-          <div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--teal),#0891b2);" data-h="85"></div></div>
-          <div class="bar-lbl">nv</div>
-        </div>
-        <div class="bar-chart-col">
-          <div class="bar-val">100%</div>
-          <div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--cyan),var(--teal));" data-h="100"></div></div>
-          <div class="bar-lbl">df</div>
-        </div>
-        <div class="bar-chart-col">
-          <div class="bar-val">99% ★</div>
-          <div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--rose),#be123c);" data-h="99"></div></div>
-          <div class="bar-lbl">mel</div>
-        </div>
-        <div class="bar-chart-col">
-          <div class="bar-val">100%</div>
-          <div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--violet),#6d28d9);" data-h="100"></div></div>
-          <div class="bar-lbl">vasc</div>
-        </div>
-        <div class="bar-chart-col">
-          <div class="bar-val">100%</div>
-          <div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--amber),#d97706);" data-h="100"></div></div>
-          <div class="bar-lbl">bcc</div>
-        </div>
-        <div class="bar-chart-col">
-          <div class="bar-val">100%</div>
-          <div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,#f97316,#ea580c);" data-h="100"></div></div>
-          <div class="bar-lbl">akiec</div>
-        </div>
+        <div class="bar-chart-col"><div class="bar-val">91%</div><div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--emerald),#059669);" data-h="91"></div></div><div class="bar-lbl">bkl</div></div>
+        <div class="bar-chart-col"><div class="bar-val">85%</div><div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--teal),#0891b2);" data-h="85"></div></div><div class="bar-lbl">nv</div></div>
+        <div class="bar-chart-col"><div class="bar-val">100%</div><div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--cyan),var(--teal));" data-h="100"></div></div><div class="bar-lbl">df</div></div>
+        <div class="bar-chart-col"><div class="bar-val">99% ★</div><div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--rose),#be123c);" data-h="99"></div></div><div class="bar-lbl">mel</div></div>
+        <div class="bar-chart-col"><div class="bar-val">100%</div><div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--violet),#6d28d9);" data-h="100"></div></div><div class="bar-lbl">vasc</div></div>
+        <div class="bar-chart-col"><div class="bar-val">100%</div><div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,var(--amber),#d97706);" data-h="100"></div></div><div class="bar-lbl">bcc</div></div>
+        <div class="bar-chart-col"><div class="bar-val">100%</div><div class="bar-wrap"><div class="bar" style="height:0%;background:linear-gradient(180deg,#f97316,#ea580c);" data-h="100"></div></div><div class="bar-lbl">akiec</div></div>
       </div>
     </div>
 
-    <!-- ROC + Confusion -->
     <div class="roc-section">
       <div class="roc-card reveal reveal-delay-1">
         <div class="roc-card-title">ROC-AUC by Class</div>
         <div class="roc-card-sub">All classes achieve ≥ 0.97, confirming excellent discriminative ability</div>
         <div class="auc-list" id="auc-list">
-          <div class="auc-row">
-            <div class="auc-label">bkl</div>
-            <div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--emerald);" data-w="96"></div></div>
-            <div class="auc-val">0.96</div>
-          </div>
-          <div class="auc-row">
-            <div class="auc-label">nv</div>
-            <div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--teal);" data-w="97"></div></div>
-            <div class="auc-val">0.97</div>
-          </div>
-          <div class="auc-row">
-            <div class="auc-label">df</div>
-            <div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--cyan);" data-w="100"></div></div>
-            <div class="auc-val">1.00</div>
-          </div>
-          <div class="auc-row">
-            <div class="auc-label">mel</div>
-            <div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--rose);" data-w="95"></div></div>
-            <div class="auc-val">0.95</div>
-          </div>
-          <div class="auc-row">
-            <div class="auc-label">vasc</div>
-            <div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--violet);" data-w="100"></div></div>
-            <div class="auc-val">1.00</div>
-          </div>
-          <div class="auc-row">
-            <div class="auc-label">bcc</div>
-            <div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--amber);" data-w="99"></div></div>
-            <div class="auc-val">0.99</div>
-          </div>
-          <div class="auc-row">
-            <div class="auc-label">akiec</div>
-            <div class="auc-bar-bg"><div class="auc-bar-fill" style="background:#f97316;" data-w="100"></div></div>
-            <div class="auc-val">1.00</div>
-          </div>
+          <div class="auc-row"><div class="auc-label">bkl</div><div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--emerald);" data-w="96"></div></div><div class="auc-val">0.96</div></div>
+          <div class="auc-row"><div class="auc-label">nv</div><div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--teal);" data-w="97"></div></div><div class="auc-val">0.97</div></div>
+          <div class="auc-row"><div class="auc-label">df</div><div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--cyan);" data-w="100"></div></div><div class="auc-val">1.00</div></div>
+          <div class="auc-row"><div class="auc-label">mel</div><div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--rose);" data-w="95"></div></div><div class="auc-val">0.95</div></div>
+          <div class="auc-row"><div class="auc-label">vasc</div><div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--violet);" data-w="100"></div></div><div class="auc-val">1.00</div></div>
+          <div class="auc-row"><div class="auc-label">bcc</div><div class="auc-bar-bg"><div class="auc-bar-fill" style="background:var(--amber);" data-w="99"></div></div><div class="auc-val">0.99</div></div>
+          <div class="auc-row"><div class="auc-label">akiec</div><div class="auc-bar-bg"><div class="auc-bar-fill" style="background:#f97316;" data-w="100"></div></div><div class="auc-val">1.00</div></div>
         </div>
       </div>
-
       <div class="roc-card reveal reveal-delay-2">
         <div class="roc-card-title">Confusion Matrix</div>
         <div class="roc-card-sub">Strong diagonal — primary confusion: nv ↔ mel (clinically safer error)</div>
-        <div id="confusion-matrix">
-          <!-- rendered by JS -->
-        </div>
+        <div id="confusion-matrix"></div>
         <div style="margin-top:12px;font-family:var(--font-mono);font-size:0.6rem;color:var(--muted);letter-spacing:0.06em;">
           Darker = more predictions · Diagonal = correct
         </div>
@@ -2199,11 +2038,10 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
 <section id="live-demo">
   <div class="container">
 
-    <!-- Hero launch area -->
     <div class="demo-launch-hero reveal">
       <div class="demo-launch-badge">
         <div class="demo-live-dot"></div>
-        Streamlit App · Python · PyTorch · Runs Locally
+        Streamlit App · Python · PyTorch · Live on Cloud
       </div>
 
       <h2 class="demo-launch-title">
@@ -2211,28 +2049,21 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       </h2>
       <p class="demo-launch-desc">
         The full DermAI Streamlit application — with image upload, metadata input,
-        Grad-CAM heatmaps, and PDF report generation — runs on your machine.
+        Grad-CAM heatmaps, and PDF report generation — is live and ready.
         Click below to open it instantly.
       </p>
 
-      <a href="http://localhost:8501" target="_blank" rel="noopener" class="demo-launch-btn" id="main-launch-btn">
+      <!-- THIS is the button that hero "Launch Live Demo" scrolls to and pulses -->
+      <a href="https://skin-disease-classification-project.streamlit.app/" target="_blank" rel="noopener" class="demo-launch-btn" id="main-launch-btn">
         <div class="btn-launch-icon">🔬</div>
         Open DermAI App
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
 
       <div class="demo-launch-sub">
-        Opens <span id="current-url">http://localhost:8501</span> in a new tab
+        Opens <span>https://skin-disease-classification-project.streamlit.app/</span> in a new tab
       </div>
 
-      <!-- Port configurator -->
-      <div class="port-row">
-        <span class="port-label">Custom port:</span>
-        <input class="port-input" id="port-input" type="number" value="8501" min="1024" max="65535">
-        <button class="port-apply" id="port-apply-btn" onclick="applyPort()">Apply</button>
-      </div>
-
-      <!-- Feature pills -->
       <div class="demo-features">
         <div class="demo-feature-pill"><span>📷</span> Image Upload</div>
         <div class="demo-feature-pill"><span>🧬</span> Metadata Fusion</div>
@@ -2243,9 +2074,7 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       </div>
     </div>
 
-    <!-- Setup instructions -->
     <div class="demo-setup-grid">
-
       <div class="setup-card reveal reveal-delay-1">
         <div class="setup-card-num">Step 01 · Prerequisites</div>
         <div class="setup-card-title">Install Dependencies</div>
@@ -2328,10 +2157,9 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
         <div class="setup-card-title">Launch from This Page</div>
         <div style="display:flex;flex-direction:column;gap:12px;">
           <p style="font-size:0.85rem;color:var(--ghost);line-height:1.65;">
-            Once Streamlit is running, click the button below to open the app
-            in a new tab. The port must match what Streamlit is using (default: 8501).
+            Click the button below to open the live DermAI app directly in a new tab — no local setup required.
           </p>
-          <a href="http://localhost:8501" target="_blank" rel="noopener" id="card-launch-btn"
+          <a href="https://skin-disease-classification-project.streamlit.app/" target="_blank" rel="noopener" id="card-launch-btn"
              style="display:flex;align-items:center;justify-content:center;gap:10px;
                     padding:14px 20px;
                     background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(0,180,216,0.1));
@@ -2342,59 +2170,29 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
             🔬 Open DermAI App
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
-          <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px 14px;font-size:0.78rem;color:#fcd34d;line-height:1.6;">
-            ⚠️ <strong>Streamlit must be running</strong> on your machine first. The button opens a local server — the app is not hosted on the internet.
+          <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:12px 14px;font-size:0.78rem;color:#6ee7b7;line-height:1.6;">
+            ✅ <strong>Hosted on Streamlit Cloud</strong> — no local installation needed. The app is live and accessible from any device.
           </div>
         </div>
       </div>
+    </div>
 
-    </div><!-- /demo-setup-grid -->
-
-    <!-- Mini architecture strip -->
     <div class="demo-arch-strip reveal" style="margin-top:48px;">
       <div class="arch-strip-title">What Happens When You Upload · Full Inference Pipeline</div>
       <div class="arch-strip-flow">
-        <div class="arch-strip-node">
-          <span class="arch-strip-icon">📷</span>
-          <div class="arch-strip-name">Image Input</div>
-          <div class="arch-strip-dim">224×224</div>
-        </div>
+        <div class="arch-strip-node"><span class="arch-strip-icon">📷</span><div class="arch-strip-name">Image Input</div><div class="arch-strip-dim">224×224</div></div>
         <div class="arch-strip-arrow">→</div>
-        <div class="arch-strip-node">
-          <span class="arch-strip-icon">🧠</span>
-          <div class="arch-strip-name">ResNet50</div>
-          <div class="arch-strip-dim">2048-d</div>
-        </div>
+        <div class="arch-strip-node"><span class="arch-strip-icon">🧠</span><div class="arch-strip-name">ResNet50</div><div class="arch-strip-dim">2048-d</div></div>
         <div class="arch-strip-arrow">→</div>
-        <div class="arch-strip-node">
-          <span class="arch-strip-icon">📊</span>
-          <div class="arch-strip-name">Meta MLP</div>
-          <div class="arch-strip-dim">19→8-d</div>
-        </div>
+        <div class="arch-strip-node"><span class="arch-strip-icon">📊</span><div class="arch-strip-name">Meta MLP</div><div class="arch-strip-dim">19→8-d</div></div>
         <div class="arch-strip-arrow">→</div>
-        <div class="arch-strip-node">
-          <span class="arch-strip-icon">🔗</span>
-          <div class="arch-strip-name">Fusion</div>
-          <div class="arch-strip-dim">2056-d</div>
-        </div>
+        <div class="arch-strip-node"><span class="arch-strip-icon">🔗</span><div class="arch-strip-name">Fusion</div><div class="arch-strip-dim">2056-d</div></div>
         <div class="arch-strip-arrow">→</div>
-        <div class="arch-strip-node">
-          <span class="arch-strip-icon">🏷️</span>
-          <div class="arch-strip-name">Softmax</div>
-          <div class="arch-strip-dim">7 classes</div>
-        </div>
+        <div class="arch-strip-node"><span class="arch-strip-icon">🏷️</span><div class="arch-strip-name">Softmax</div><div class="arch-strip-dim">7 classes</div></div>
         <div class="arch-strip-arrow">→</div>
-        <div class="arch-strip-node">
-          <span class="arch-strip-icon">🔥</span>
-          <div class="arch-strip-name">Grad-CAM</div>
-          <div class="arch-strip-dim">Heatmap</div>
-        </div>
+        <div class="arch-strip-node"><span class="arch-strip-icon">🔥</span><div class="arch-strip-name">Grad-CAM</div><div class="arch-strip-dim">Heatmap</div></div>
         <div class="arch-strip-arrow">→</div>
-        <div class="arch-strip-node">
-          <span class="arch-strip-icon">📄</span>
-          <div class="arch-strip-name">PDF Report</div>
-          <div class="arch-strip-dim">Download</div>
-        </div>
+        <div class="arch-strip-node"><span class="arch-strip-icon">📄</span><div class="arch-strip-name">PDF Report</div><div class="arch-strip-dim">Download</div></div>
       </div>
     </div>
 
@@ -2431,7 +2229,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
           </div>
         </div>
 
-        <!-- Colour legend -->
         <div style="background:var(--ink-3);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;margin-bottom:16px;">
           <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Grad-CAM Colour Scale</div>
           <div style="display:flex;gap:8px;align-items:center;">
@@ -2443,7 +2240,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
           </div>
         </div>
 
-        <!-- Training curves placeholder -->
         <div style="background:var(--ink-3);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:20px;">
           <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Training Dynamics (14 Epochs)</div>
           <canvas id="training-chart" width="400" height="180"></canvas>
@@ -2458,41 +2254,11 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
         </p>
 
         <div class="how-gradcam">
-          <div class="gcam-step">
-            <div class="gcam-num">1</div>
-            <div class="gcam-text">
-              <div class="gcam-title">Forward Pass</div>
-              <div class="gcam-desc">The dermoscopic image passes through all ResNet50 layers, producing feature maps at layer4 with rich visual representations.</div>
-            </div>
-          </div>
-          <div class="gcam-step">
-            <div class="gcam-num">2</div>
-            <div class="gcam-text">
-              <div class="gcam-title">Gradient Computation</div>
-              <div class="gcam-desc">A one-hot vector for the predicted class is backpropagated. The gradients flowing into layer4 indicate which feature map channels matter most.</div>
-            </div>
-          </div>
-          <div class="gcam-step">
-            <div class="gcam-num">3</div>
-            <div class="gcam-text">
-              <div class="gcam-title">Weighted Activation Map</div>
-              <div class="gcam-desc">Channel-wise weights are computed by global average pooling the gradients. These weights are applied to the activation maps and summed.</div>
-            </div>
-          </div>
-          <div class="gcam-step">
-            <div class="gcam-num">4</div>
-            <div class="gcam-text">
-              <div class="gcam-title">ReLU & Upsampling</div>
-              <div class="gcam-desc">ReLU removes negative contributions (regions that reduce class confidence). The map is upsampled to 224×224 and overlaid on the original image.</div>
-            </div>
-          </div>
-          <div class="gcam-step">
-            <div class="gcam-num">5</div>
-            <div class="gcam-text">
-              <div class="gcam-title">Clinical Transparency</div>
-              <div class="gcam-desc">Clinicians can verify the AI is looking at the actual lesion, not background skin or image artifacts — building justified trust in the prediction.</div>
-            </div>
-          </div>
+          <div class="gcam-step"><div class="gcam-num">1</div><div class="gcam-text"><div class="gcam-title">Forward Pass</div><div class="gcam-desc">The dermoscopic image passes through all ResNet50 layers, producing feature maps at layer4 with rich visual representations.</div></div></div>
+          <div class="gcam-step"><div class="gcam-num">2</div><div class="gcam-text"><div class="gcam-title">Gradient Computation</div><div class="gcam-desc">A one-hot vector for the predicted class is backpropagated. The gradients flowing into layer4 indicate which feature map channels matter most.</div></div></div>
+          <div class="gcam-step"><div class="gcam-num">3</div><div class="gcam-text"><div class="gcam-title">Weighted Activation Map</div><div class="gcam-desc">Channel-wise weights are computed by global average pooling the gradients. These weights are applied to the activation maps and summed.</div></div></div>
+          <div class="gcam-step"><div class="gcam-num">4</div><div class="gcam-text"><div class="gcam-title">ReLU & Upsampling</div><div class="gcam-desc">ReLU removes negative contributions (regions that reduce class confidence). The map is upsampled to 224×224 and overlaid on the original image.</div></div></div>
+          <div class="gcam-step"><div class="gcam-num">5</div><div class="gcam-text"><div class="gcam-title">Clinical Transparency</div><div class="gcam-desc">Clinicians can verify the AI is looking at the actual lesion, not background skin or image artifacts — building justified trust in the prediction.</div></div></div>
         </div>
 
         <div style="background:var(--ink-3);border:1px solid rgba(0,212,255,0.15);border-radius:14px;padding:20px;margin-top:24px;">
@@ -2523,7 +2289,6 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       Our framework achieves superior melanoma recall while maintaining competitive
       overall accuracy with fewer classes of false negatives.
     </p>
-
     <div class="comparison-table-wrap reveal">
       <table class="comparison-table">
         <thead>
@@ -2537,89 +2302,20 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Esteva et al.</td>
-            <td>Inception-V3</td>
-            <td>2</td>
-            <td class="dim-val">72.1%</td>
-            <td class="dim-val">0.91</td>
-            <td class="dim-val">0.96</td>
-          </tr>
-          <tr>
-            <td>Codella et al.</td>
-            <td>Ensemble CNN</td>
-            <td>3</td>
-            <td class="dim-val">78.3%</td>
-            <td class="dim-val">0.88</td>
-            <td class="dim-val">0.94</td>
-          </tr>
-          <tr>
-            <td>Kawahara et al.</td>
-            <td>CNN + SVM</td>
-            <td>5</td>
-            <td class="dim-val">82.4%</td>
-            <td class="dim-val">0.90</td>
-            <td class="dim-val">0.95</td>
-          </tr>
-          <tr>
-            <td>Yu et al.</td>
-            <td>Deep CNN</td>
-            <td>7</td>
-            <td class="dim-val">85.2%</td>
-            <td class="dim-val">0.93</td>
-            <td class="dim-val">0.97</td>
-          </tr>
-          <tr>
-            <td>Khan et al.</td>
-            <td>CNN + Feature Fusion</td>
-            <td>7</td>
-            <td class="dim-val">87.1%</td>
-            <td class="dim-val">0.95</td>
-            <td class="dim-val">0.98</td>
-          </tr>
-          <tr>
-            <td>Vision Transformer (ViT)</td>
-            <td>Transformer-only</td>
-            <td>7</td>
-            <td class="dim-val">86.5%</td>
-            <td class="dim-val">0.94</td>
-            <td class="dim-val">0.97</td>
-          </tr>
-          <tr>
-            <td>🏆 Proposed Method (Ours)</td>
-            <td>CNN + Fusion + Transformer</td>
-            <td>7</td>
-            <td class="highlight-val">89.0%</td>
-            <td class="highlight-val">0.99 ★</td>
-            <td class="highlight-val">0.98–1.00</td>
-          </tr>
+          <tr><td>Esteva et al.</td><td>Inception-V3</td><td>2</td><td class="dim-val">72.1%</td><td class="dim-val">0.91</td><td class="dim-val">0.96</td></tr>
+          <tr><td>Codella et al.</td><td>Ensemble CNN</td><td>3</td><td class="dim-val">78.3%</td><td class="dim-val">0.88</td><td class="dim-val">0.94</td></tr>
+          <tr><td>Kawahara et al.</td><td>CNN + SVM</td><td>5</td><td class="dim-val">82.4%</td><td class="dim-val">0.90</td><td class="dim-val">0.95</td></tr>
+          <tr><td>Yu et al.</td><td>Deep CNN</td><td>7</td><td class="dim-val">85.2%</td><td class="dim-val">0.93</td><td class="dim-val">0.97</td></tr>
+          <tr><td>Khan et al.</td><td>CNN + Feature Fusion</td><td>7</td><td class="dim-val">87.1%</td><td class="dim-val">0.95</td><td class="dim-val">0.98</td></tr>
+          <tr><td>Vision Transformer (ViT)</td><td>Transformer-only</td><td>7</td><td class="dim-val">86.5%</td><td class="dim-val">0.94</td><td class="dim-val">0.97</td></tr>
+          <tr><td>🏆 Proposed Method (Ours)</td><td>CNN + Fusion + Transformer</td><td>7</td><td class="highlight-val">89.0%</td><td class="highlight-val">0.99 ★</td><td class="highlight-val">0.98–1.00</td></tr>
         </tbody>
       </table>
     </div>
-
-    <!-- Key takeaways -->
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:32px;">
-      <div class="future-item reveal reveal-delay-1">
-        <div class="future-dot"></div>
-        <div class="future-text">
-          <strong>+4.1% vs Baseline CNN</strong>
-          Outperforms Yu et al.'s 7-class deep CNN by 4.1 percentage points in overall accuracy.
-        </div>
-      </div>
-      <div class="future-item reveal reveal-delay-2">
-        <div class="future-dot" style="background:var(--rose);box-shadow:0 0 10px var(--rose);"></div>
-        <div class="future-text">
-          <strong>Highest Melanoma Recall</strong>
-          0.99 recall — the highest among all compared methods, critical for clinical safety.
-        </div>
-      </div>
-      <div class="future-item reveal reveal-delay-3">
-        <div class="future-dot" style="background:var(--emerald);box-shadow:0 0 10px var(--emerald);"></div>
-        <div class="future-text">
-          <strong>Best AUC Range</strong>
-          ROC-AUC of 0.98–1.00 across all 7 classes — unmatched discriminative capability.
-        </div>
-      </div>
+      <div class="future-item reveal reveal-delay-1"><div class="future-dot"></div><div class="future-text"><strong>+4.1% vs Baseline CNN</strong>Outperforms Yu et al.'s 7-class deep CNN by 4.1 percentage points in overall accuracy.</div></div>
+      <div class="future-item reveal reveal-delay-2"><div class="future-dot" style="background:var(--rose);box-shadow:0 0 10px var(--rose);"></div><div class="future-text"><strong>Highest Melanoma Recall</strong>0.99 recall — the highest among all compared methods, critical for clinical safety.</div></div>
+      <div class="future-item reveal reveal-delay-3"><div class="future-dot" style="background:var(--emerald);box-shadow:0 0 10px var(--emerald);"></div><div class="future-text"><strong>Best AUC Range</strong>ROC-AUC of 0.98–1.00 across all 7 classes — unmatched discriminative capability.</div></div>
     </div>
   </div>
 </section>
@@ -2638,85 +2334,22 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       with implications for early screening, telemedicine, and healthcare equity in
       resource-limited settings across the developing world.
     </p>
-
     <div class="impact-grid">
-      <div class="impact-card reveal reveal-delay-1">
-        <span class="impact-icon">🏥</span>
-        <div class="impact-title">Early Detection Support</div>
-        <div class="impact-body">
-          The model's 99% melanoma recall means only ~1% of melanoma cases are missed. In real-world
-          screening, this represents hundreds of lives saved annually through early intervention
-          when treatment success rates are highest.
-        </div>
-      </div>
-      <div class="impact-card reveal reveal-delay-2">
-        <span class="impact-icon">🌍</span>
-        <div class="impact-title">Healthcare Equity</div>
-        <div class="impact-body">
-          Rural and underdeveloped regions with limited specialist access can deploy this system
-          as a first-line triage tool. A smartphone with the deployed model can match the diagnostic
-          sensitivity of expert dermatologists for malignant lesions.
-        </div>
-      </div>
-      <div class="impact-card reveal reveal-delay-3">
-        <span class="impact-icon">🔒</span>
-        <div class="impact-title">Clinically Safe Errors</div>
-        <div class="impact-body">
-          Error analysis reveals the model preferentially makes false-positive errors (benign
-          misclassified as malignant) rather than false negatives. This "cautious" pattern
-          aligns with clinical priorities — over-referral is safer than missed cancer.
-        </div>
-      </div>
+      <div class="impact-card reveal reveal-delay-1"><span class="impact-icon">🏥</span><div class="impact-title">Early Detection Support</div><div class="impact-body">The model's 99% melanoma recall means only ~1% of melanoma cases are missed. In real-world screening, this represents hundreds of lives saved annually through early intervention when treatment success rates are highest.</div></div>
+      <div class="impact-card reveal reveal-delay-2"><span class="impact-icon">🌍</span><div class="impact-title">Healthcare Equity</div><div class="impact-body">Rural and underdeveloped regions with limited specialist access can deploy this system as a first-line triage tool. A smartphone with the deployed model can match the diagnostic sensitivity of expert dermatologists for malignant lesions.</div></div>
+      <div class="impact-card reveal reveal-delay-3"><span class="impact-icon">🔒</span><div class="impact-title">Clinically Safe Errors</div><div class="impact-body">Error analysis reveals the model preferentially makes false-positive errors (benign misclassified as malignant) rather than false negatives. This "cautious" pattern aligns with clinical priorities — over-referral is safer than missed cancer.</div></div>
     </div>
-
     <div style="margin-top:64px;">
       <div class="section-tag reveal">Limitations & Future Work</div>
       <h3 class="section-title reveal reveal-delay-1" style="font-size:2rem;">Known Limitations &<br><em>Planned Extensions</em></h3>
     </div>
-
     <div class="future-grid">
-      <div class="future-item reveal reveal-delay-1">
-        <div class="future-dot" style="background:var(--rose);box-shadow:0 0 10px var(--rose);"></div>
-        <div class="future-text">
-          <strong>Skin Tone Diversity</strong>
-          HAM10000 underrepresents darker skin tones. Future work includes StyleGAN3-based synthetic augmentation for diverse populations.
-        </div>
-      </div>
-      <div class="future-item reveal reveal-delay-2">
-        <div class="future-dot" style="background:var(--amber);box-shadow:0 0 10px var(--amber);"></div>
-        <div class="future-text">
-          <strong>Melanoma False Positives</strong>
-          Precision of 0.56 for melanoma means over-referral. Future calibration using Platt scaling or temperature scaling will improve specificity.
-        </div>
-      </div>
-      <div class="future-item reveal reveal-delay-3">
-        <div class="future-dot" style="background:var(--violet);box-shadow:0 0 10px var(--violet);"></div>
-        <div class="future-text">
-          <strong>Mobile Deployment</strong>
-          Transformer attention increases computational cost. Future work: knowledge distillation to create a lightweight MobileNet-based variant.
-        </div>
-      </div>
-      <div class="future-item reveal reveal-delay-4">
-        <div class="future-dot"></div>
-        <div class="future-text">
-          <strong>External Validation</strong>
-          Testing on ISIC 2020, PH2, and Derm7pt datasets will confirm generalization beyond HAM10000's specific clinical distribution.
-        </div>
-      </div>
-      <div class="future-item reveal reveal-delay-1">
-        <div class="future-dot" style="background:var(--emerald);box-shadow:0 0 10px var(--emerald);"></div>
-        <div class="future-text">
-          <strong>Real-Time Web & Mobile App</strong>
-          The Streamlit proof-of-concept will be extended into a production-grade application with HIPAA-compliant data handling.
-        </div>
-      </div>
-      <div class="future-item reveal reveal-delay-2">
-        <div class="future-dot" style="background:var(--teal);box-shadow:0 0 10px var(--teal);"></div>
-        <div class="future-text">
-          <strong>CNN–Transformer Ensemble</strong>
-          Exploring hybrid ViT + ResNet ensembles and attention-based fusion mechanisms to further boost minority class performance.
-        </div>
-      </div>
+      <div class="future-item reveal reveal-delay-1"><div class="future-dot" style="background:var(--rose);box-shadow:0 0 10px var(--rose);"></div><div class="future-text"><strong>Skin Tone Diversity</strong>HAM10000 underrepresents darker skin tones. Future work includes StyleGAN3-based synthetic augmentation for diverse populations.</div></div>
+      <div class="future-item reveal reveal-delay-2"><div class="future-dot" style="background:var(--amber);box-shadow:0 0 10px var(--amber);"></div><div class="future-text"><strong>Melanoma False Positives</strong>Precision of 0.56 for melanoma means over-referral. Future calibration using Platt scaling or temperature scaling will improve specificity.</div></div>
+      <div class="future-item reveal reveal-delay-3"><div class="future-dot" style="background:var(--violet);box-shadow:0 0 10px var(--violet);"></div><div class="future-text"><strong>Mobile Deployment</strong>Transformer attention increases computational cost. Future work: knowledge distillation to create a lightweight MobileNet-based variant.</div></div>
+      <div class="future-item reveal reveal-delay-4"><div class="future-dot"></div><div class="future-text"><strong>External Validation</strong>Testing on ISIC 2020, PH2, and Derm7pt datasets will confirm generalization beyond HAM10000's specific clinical distribution.</div></div>
+      <div class="future-item reveal reveal-delay-1"><div class="future-dot" style="background:var(--emerald);box-shadow:0 0 10px var(--emerald);"></div><div class="future-text"><strong>Real-Time Web & Mobile App</strong>The Streamlit proof-of-concept will be extended into a production-grade application with HIPAA-compliant data handling.</div></div>
+      <div class="future-item reveal reveal-delay-2"><div class="future-dot" style="background:var(--teal);box-shadow:0 0 10px var(--teal);"></div><div class="future-text"><strong>CNN–Transformer Ensemble</strong>Exploring hybrid ViT + ResNet ensembles and attention-based fusion mechanisms to further boost minority class performance.</div></div>
     </div>
   </div>
 </section>
@@ -2734,41 +2367,30 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
       Presented at Sharda University, Greater Noida, India. Department of Computer Science
       and Application / Engineering.
     </p>
-
-    <div class="team-grid reveal">
+    
+    <div class="team-grid reveal" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
       <div class="team-card">
         <div class="team-avatar">👨‍💻</div>
         <div class="team-name">Joshin K Saju</div>
         <div class="team-role">Lead Author</div>
         <div class="team-dept">Dept. of CS & Application<br>Sharda University</div>
       </div>
-      <div class="team-card">
-        <div class="team-avatar">👨‍🔬</div>
-        <div class="team-name">Deepayan Thakur</div>
-        <div class="team-role">Co-Author</div>
-        <div class="team-dept">Dept. of CS & Engineering<br>Sharda University</div>
-      </div>
+      
       <div class="team-card">
         <div class="team-avatar">👨‍💻</div>
         <div class="team-name">Parth Sharma</div>
         <div class="team-role">Co-Author</div>
         <div class="team-dept">Dept. of CS & Application<br>Sharda University</div>
       </div>
+      
       <div class="team-card">
         <div class="team-avatar">👨‍🏫</div>
         <div class="team-name">Dr. Anand Pandey</div>
         <div class="team-role">Supervisor</div>
         <div class="team-dept">Dept. of CS & Application<br>Sharda University</div>
       </div>
-      <div class="team-card">
-        <div class="team-avatar">👨‍🏫</div>
-        <div class="team-name">Dr. Mohd Tajammul</div>
-        <div class="team-role">Co-Supervisor</div>
-        <div class="team-dept">Dept. of CS & Application<br>Sharda University</div>
-      </div>
     </div>
-
-    <!-- Paper meta -->
+    
     <div style="margin-top:48px;background:var(--ink-3);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px;max-width:700px;margin-left:auto;margin-right:auto;" class="reveal">
       <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;">Paper Citation</div>
       <div style="font-family:var(--font-serif);font-size:1rem;color:var(--white);font-style:italic;line-height:1.7;margin-bottom:16px;">
@@ -2815,6 +2437,20 @@ fused = <span class="code-func">cat</span>([img_feat, meta_feat], dim=<span clas
      JAVASCRIPT
 ═══════════════════════════════════════════ -->
 <script>
+/* ─── Scroll-to-Demo with pulse highlight ─── */
+function scrollToDemo() {
+  const demoSection = document.getElementById('live-demo');
+  const mainBtn = document.getElementById('main-launch-btn');
+
+  demoSection.scrollIntoView({ behavior: 'smooth' });
+
+  // After scroll completes, flash-pulse the Open DermAI App button
+  setTimeout(() => {
+    mainBtn.classList.add('highlight-anim');
+    setTimeout(() => mainBtn.classList.remove('highlight-anim'), 900);
+  }, 700);
+}
+
 /* ─── Custom Cursor ─── */
 const cursor = document.querySelector('.cursor-dot');
 const ring   = document.getElementById('cursor-ring');
@@ -2857,37 +2493,25 @@ const progressBar = document.getElementById('progress-bar');
 window.addEventListener('scroll',()=>{
   const pct = window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
   progressBar.style.width = pct+'%';
-  // Nav shrink
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY>50);
 });
 
-/* ─── Intersection Observer: reveal + counters + bars ─── */
+/* ─── Intersection Observer ─── */
 const io = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(!entry.isIntersecting) return;
     const el = entry.target;
     el.classList.add('visible');
-
-    // count-up
     el.querySelectorAll('.count-up').forEach(c=>animCount(c));
-
-    // bar chart bars
-    el.querySelectorAll('.bar[data-h]').forEach(b=>{
-      b.style.height = b.dataset.h+'%';
-    });
-
-    // AUC bars
+    el.querySelectorAll('.bar[data-h]').forEach(b=>{ b.style.height = b.dataset.h+'%'; });
     el.querySelectorAll('.auc-bar-fill[data-w]').forEach(b=>{
       setTimeout(()=>{ b.style.width = b.dataset.w+'%'; },300);
     });
-
     io.unobserve(el);
   });
 },{threshold:0.15});
 
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// Also observe section-level for bars/AUC
 ['#results','#bar-chart','#auc-list'].forEach(sel=>{
   const el = document.querySelector(sel);
   if(el) io.observe(el);
@@ -2922,12 +2546,8 @@ const confData = [
 const maxVal = Math.max(...confData.flat());
 const cmEl = document.getElementById('confusion-matrix');
 let cmHtml = '<div style="display:grid;grid-template-columns:32px repeat(7,1fr);gap:2px;font-family:var(--font-mono);">';
-// header
 cmHtml += '<div></div>';
-classes.forEach(c=>{
-  cmHtml += `<div style="text-align:center;font-size:0.55rem;letter-spacing:0.04em;color:var(--muted);padding:3px 0;">${c}</div>`;
-});
-// rows
+classes.forEach(c=>{ cmHtml += `<div style="text-align:center;font-size:0.55rem;letter-spacing:0.04em;color:var(--muted);padding:3px 0;">${c}</div>`; });
 confData.forEach((row,ri)=>{
   cmHtml += `<div style="display:flex;align-items:center;font-size:0.55rem;color:var(--muted);padding-right:4px;justify-content:flex-end;">${classes[ri]}</div>`;
   row.forEach((val,ci)=>{
@@ -2954,25 +2574,21 @@ cmEl.innerHTML = cmHtml;
 function drawLesion(canvas){
   const ctx = canvas.getContext('2d');
   const w=canvas.width, h=canvas.height;
-  // skin background
   const bg = ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);
   bg.addColorStop(0,'#c8956c');bg.addColorStop(0.5,'#b5724a');bg.addColorStop(1,'#8b5a3c');
   ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
-  // noise texture
   for(let i=0;i<2000;i++){
     const x=Math.random()*w,y=Math.random()*h;
     const a=Math.random()*0.08;
     ctx.fillStyle=`rgba(0,0,0,${a})`;
     ctx.fillRect(x,y,1,1);
   }
-  // lesion
   const lg = ctx.createRadialGradient(w*0.48,h*0.48,5,w*0.48,h*0.48,w*0.28);
   lg.addColorStop(0,'#1a0a05');lg.addColorStop(0.4,'#3d1a0e');
   lg.addColorStop(0.7,'#6b3320');lg.addColorStop(1,'rgba(90,40,20,0)');
   ctx.beginPath();
   ctx.ellipse(w*0.48,h*0.48,w*0.26,h*0.22,0.3,0,Math.PI*2);
   ctx.fillStyle=lg; ctx.fill();
-  // highlight
   ctx.beginPath();
   ctx.ellipse(w*0.42,h*0.42,w*0.06,h*0.04,-0.3,0,Math.PI*2);
   ctx.fillStyle='rgba(255,220,180,0.25)'; ctx.fill();
@@ -2982,11 +2598,9 @@ function drawHeatmap(canvas){
   const ctx = canvas.getContext('2d');
   const w=canvas.width,h=canvas.height;
   ctx.fillStyle='#000'; ctx.fillRect(0,0,w,h);
-  // base cool
   const base=ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w*0.5);
   base.addColorStop(0,'rgba(0,80,180,0.3)');base.addColorStop(1,'rgba(0,0,60,0.8)');
   ctx.fillStyle=base;ctx.fillRect(0,0,w,h);
-  // hot zone
   const hot=ctx.createRadialGradient(w*0.48,h*0.48,0,w*0.48,h*0.48,w*0.3);
   hot.addColorStop(0,'rgba(255,0,0,0.95)');
   hot.addColorStop(0.2,'rgba(255,120,0,0.85)');
@@ -3030,26 +2644,15 @@ drawOverlay(document.getElementById('canvas-overlay'));
   const valAcc   = [62,67,72,76,79,81.5,83,84,85.2,86,86.8,87.5,87.9,88.2];
   const pad = {l:36,r:16,t:12,b:28};
   const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
-
   ctx.clearRect(0,0,W,H);
-
-  // grid
   ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=1;
   for(let i=0;i<=4;i++){
     const y=pad.t+cH*i/4;
     ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
   }
-
-  // axes labels
   ctx.fillStyle='#475a73'; ctx.font='9px DM Mono,monospace';
-  ['65','72','79','86','100'].forEach((v,i)=>{
-    ctx.fillText(v, pad.l-32, pad.t+cH*(1-i/4)+3);
-  });
-  ['1','4','7','10','14'].forEach((v,i)=>{
-    const x=pad.l+cW*(i/4);
-    ctx.fillText(v, x-3, H-4);
-  });
-
+  ['65','72','79','86','100'].forEach((v,i)=>{ ctx.fillText(v, pad.l-32, pad.t+cH*(1-i/4)+3); });
+  ['1','4','7','10','14'].forEach((v,i)=>{ const x=pad.l+cW*(i/4); ctx.fillText(v, x-3, H-4); });
   function plotLine(data, color){
     const n=data.length;
     ctx.beginPath();
@@ -3060,81 +2663,29 @@ drawOverlay(document.getElementById('canvas-overlay'));
     });
     ctx.strokeStyle=color; ctx.lineWidth=2;
     ctx.lineJoin='round'; ctx.stroke();
-
-    // area fill
     ctx.lineTo(pad.l+cW,pad.t+cH); ctx.lineTo(pad.l,pad.t+cH); ctx.closePath();
     const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+cH);
     grad.addColorStop(0,color.replace(')',',0.15)').replace('rgb','rgba'));
     grad.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=grad; ctx.fill();
   }
-
   plotLine(trainAcc,'rgb(0,212,255)');
   plotLine(valAcc,  'rgb(129,140,248)');
-
-  // legend
   ctx.fillStyle='rgb(0,212,255)';ctx.fillRect(W-90,pad.t,12,2);
   ctx.fillStyle='#e8edf5';ctx.font='9px DM Mono,monospace';ctx.fillText('Train Acc',W-74,pad.t+4);
   ctx.fillStyle='rgb(129,140,248)';ctx.fillRect(W-90,pad.t+14,12,2);
   ctx.fillStyle='#e8edf5';ctx.fillText('Val Acc',W-74,pad.t+18);
 })();
 
-/* ─── Port Configurator ─── */
-let currentPort = 8501;
-
-function applyPort() {
-  const input = document.getElementById('port-input');
-  const port  = parseInt(input.value, 10);
-  if (!port || port < 1024 || port > 65535) {
-    input.style.borderColor = 'rgba(244,63,94,0.6)';
-    setTimeout(() => { input.style.borderColor = ''; }, 1200);
-    return;
-  }
-  currentPort = port;
-  const url = `http://localhost:${port}`;
-
-  // Update all launch buttons
-  ['main-launch-btn','card-launch-btn'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.href = url;
-  });
-
-  // Update display text
-  const display = document.getElementById('current-url');
-  if (display) display.textContent = url;
-
-  // Visual confirmation
-  const btn = document.getElementById('port-apply-btn');
-  const orig = btn.textContent;
-  btn.textContent = '✓ Applied';
-  btn.style.color = 'var(--emerald)';
-  btn.style.borderColor = 'rgba(16,185,129,0.4)';
-  setTimeout(() => {
-    btn.textContent = orig;
-    btn.style.color = '';
-    btn.style.borderColor = '';
-  }, 2000);
-}
-
-// Allow pressing Enter in port input
-document.getElementById('port-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') applyPort();
-});
-
 /* ─── Copy Command Buttons ─── */
 function copyCmd(btn, text) {
-  // If text is empty, do nothing (for structure display)
   if (!text) return;
   navigator.clipboard.writeText(text).then(() => {
     const orig = btn.textContent;
     btn.textContent = '✓ Copied!';
     btn.classList.add('copied');
-    setTimeout(() => {
-      btn.textContent = orig;
-      btn.classList.remove('copied');
-    }, 2000);
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
   }).catch(() => {
-    // Fallback for browsers without clipboard API
     const ta = document.createElement('textarea');
     ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
     document.body.appendChild(ta); ta.select();
@@ -3146,7 +2697,7 @@ function copyCmd(btn, text) {
   });
 }
 
-/* ─── Launch button hover effect on card ─── */
+/* ─── Card launch button hover ─── */
 const cardLaunchBtn = document.getElementById('card-launch-btn');
 if (cardLaunchBtn) {
   cardLaunchBtn.addEventListener('mouseenter', () => {
@@ -3159,7 +2710,7 @@ if (cardLaunchBtn) {
   });
 }
 
-/* ─── Add launch buttons to cursor expand list ─── */
+/* ─── Cursor expand for launch buttons ─── */
 ['main-launch-btn','card-launch-btn','hero-launch-btn'].forEach(id => {
   const el = document.getElementById(id);
   if (el) {
@@ -3167,7 +2718,6 @@ if (cardLaunchBtn) {
     el.addEventListener('mouseleave', () => ring.classList.remove('expand'));
   }
 });
-
 </script>
 </body>
 </html>
